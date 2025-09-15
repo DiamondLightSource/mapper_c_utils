@@ -402,6 +402,7 @@ static PyObject *linear_pol_correction(PyObject *dummy, PyObject *args)
     return Py_None;
 }
 
+
 static PyObject *cylindrical_polar(PyObject *dummy, PyObject *args)
 {
     // Pointers to the arguments we're going to receive (one matrix and one
@@ -450,6 +451,64 @@ static PyObject *cylindrical_polar(PyObject *dummy, PyObject *args)
     return Py_None;
 }
 
+
+static PyObject *spherical_polar(PyObject *dummy, PyObject *args)
+{
+    // Pointers to the arguments we're going to receive (one matrix and one
+    // array of vectors).
+    PyObject *vector_array_arg = NULL;
+
+    // Parse these arguments.
+    if (!PyArg_ParseTuple(args, "O", &vector_array_arg))
+        return NULL;
+
+    // Cast them to numpy arrays of floats.
+    PyObject *vector_array = PyArray_FROM_OTF(vector_array_arg,
+                                              NPY_FLOAT32, NPY_IN_ARRAY);
+    float *vector_array_pointer = PyArray_GETPTR1(vector_array, 0);
+
+    // Work out how many vectors we're dealing with here.
+    npy_intp *shape = PyArray_SHAPE((PyArrayObject *)vector_array);
+    int number_of_vectors = shape[0];
+
+    // Iterate over each of the vectors and map them by the matrix.
+    for (int i = 0; i < number_of_vectors; ++i)
+    {
+        vector_float32 *current_vector =
+            (vector_float32 *)(vector_array_pointer + i * 3);
+
+        // Make this code a bit less ugly.
+        
+        
+        float x = current_vector->x;
+        float y = current_vector->y;
+        float z = current_vector->z;
+
+        // calculate vector radius
+        // float radius = npy_sqrtf(x*x + y*y + z*z);
+        float radius = npy_sqrtf(x*x + y*y + z*z);
+
+        //from radius calculate the angle to z (theta)
+        float theta = acosf(z/radius);
+
+        // Calculate the polar angle (phi) from the x-axis.
+        float phi = atan2f(y, x);
+
+
+        // // Now update the current_vector to be in polar coords.
+        current_vector->x = radius;
+        current_vector->y = theta;
+        current_vector->z = phi;
+    }
+
+    // Do the usual housework: don't leak memory and return None.
+    Py_DECREF(vector_array);
+
+    Py_IncRef(Py_None);
+    return Py_None;
+}
+
+
 static PyMethodDef mapper_c_utils_methods[] = {
     {
         "weighted_bin_3d",
@@ -481,6 +540,12 @@ static PyMethodDef mapper_c_utils_methods[] = {
         cylindrical_polar,
         METH_VARARGS,
         "Maps input Nx3 vector to cylindrical polars (in degrees).",
+    },
+    {
+        "spherical_polar",
+        spherical_polar,
+        METH_VARARGS,
+        "Maps input Nx3 vector to spherical polars (in radians).",
     },
     {
         "linear_map",
