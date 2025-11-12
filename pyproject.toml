@@ -8,6 +8,7 @@ name = "mapper_c_utils"
 version = "1.0.0"
 description = "Mapper C utilities"
 authors = [
-    { name = "Your Name", email = "you@example.com" }
+    { name = "Diamond Light Source", email = "philip.mousley@diamond.ac.uk" }
 ]
 dependencies = ["numpy"]
+readme="readme.md"
