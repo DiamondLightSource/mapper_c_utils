@@ -1,0 +1,13 @@
+
+[build-system]
+requires = ["setuptools", "wheel", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mapper_c_utils"
+version = "1.0.0"
+description = "Mapper C utilities"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+dependencies = ["numpy"]
