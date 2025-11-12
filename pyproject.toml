@@ -1,14 +1,11 @@
 
 [build-system]
-requires = ["setuptools", "wheel", "numpy"]
+requires = ["setuptools>=61.0", "wheel", "numpy"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapper_c_utils"
 version = "1.1.0"
-description = "Mapper C utilities"
-authors = [
-    { name = "Diamond Light Source", email = "philip.mousley@diamond.ac.uk" }
-]
+description = "C utilities for mapper"
+requires-python = ">=3.8"
 dependencies = ["numpy"]
-readme="readme.md"
