@@ -1,5 +1,5 @@
 """
-latest version created: create_pyfaiponi in mapper_c_utils/
+latest version created: fullrsm_scanlength in mapper_c_utils/
 """
 
 import sysconfig
