@@ -1,19 +1,27 @@
+"""
+latest version created: create_pyfaiponi in mapper_c_utils/
+"""
 
-latest version created: add_pyfaiponi in mapper_c_utils/
-from numpy.distutils.misc_util import Configuration, get_info
 import sysconfig
 
-EXTRA_COMPILE_ARGS = sysconfig.get_config_var('CFLAGS').split() + ["-std=c99"]
+from numpy.distutils.core import setup
+from numpy.distutils.misc_util import Configuration, get_info
 
-def configuration(parent_package='', top_path=None):
-    info = get_info('npymath')
-    config = Configuration('', parent_package, top_path)
-    config.add_extension('mapper_c_utils',
-                         ['src/mapper_c_utils/mapper_c_utils.c'],
-                         extra_info=info,
-                         language='c99',
-                         extra_compile_args=EXTRA_COMPILE_ARGS)
+EXTRA_COMPILE_ARGS = sysconfig.get_config_var("CFLAGS").split() + ["-std=c99"]
+
+
+def configuration(parent_package="", top_path=None):
+    info = get_info("npymath")
+    config = Configuration("", parent_package, top_path)
+    config.add_extension(
+        "mapper_c_utils",
+        ["src/mapper_c_utils/mapper_c_utils.c"],
+        extra_info=info,
+        language="c99",
+        extra_compile_args=EXTRA_COMPILE_ARGS,
+    )
     return config
 
+
 if __name__ == "__main__":
-    setup(name='mapper_c_utils', version='1.1.0', configuration=configuration)
+    setup(name="mapper_c_utils", version="1.1.0", configuration=configuration)
