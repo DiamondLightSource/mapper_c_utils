@@ -1,5 +1,5 @@
 
-from numpy.distutils.core import setup
+latest version created: add_pyfaiponi in mapper_c_utils/
 from numpy.distutils.misc_util import Configuration, get_info
 import sysconfig
 
