@@ -1,5 +1,5 @@
 """
-latest version created: add_ivschi in mapper_c_utils/
+latest version created: distcalc in mapper_c_utils/
 """
 
 import sysconfig
