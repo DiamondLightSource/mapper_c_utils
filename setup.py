@@ -1,5 +1,5 @@
 """
-latest version created: add_ivschi in mapper_c_utils/
+latest version created: writing_module in mapper_c_utils/
 """
 
 import sysconfig
