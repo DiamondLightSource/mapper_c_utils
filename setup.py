@@ -1,5 +1,5 @@
 """
-latest version created: mask_issue in mapper_c_utils/
+latest version created: det_info_issue in mapper_c_utils/
 """
 
 import sysconfig
