@@ -1,27 +1,24 @@
-"""
-latest version created: mapper_c_312 in mapper_c_utils/
-"""
-
 import sysconfig
 
-from numpy.distutils.core import setup
-from numpy.distutils.misc_util import Configuration, get_info
+import numpy as np
+from setuptools import Extension, setup
 
 EXTRA_COMPILE_ARGS = sysconfig.get_config_var("CFLAGS").split() + ["-std=c99"]
 
 
-def configuration(parent_package="", top_path=None):
-    info = get_info("npymath")
-    config = Configuration("", parent_package, top_path)
-    config.add_extension(
-        "mapper_c_utils",
-        ["src/mapper_c_utils/mapper_c_utils.c"],
-        extra_info=info,
-        language="c99",
-        extra_compile_args=EXTRA_COMPILE_ARGS,
-    )
-    return config
+ext = Extension(
+    name="mapper_c_utils",
+    sources=["src/mapper_c_utils/mapper_c_utils.c"],
+    include_dirs=[
+        sysconfig.get_paths()["include"],  # correct python
+        np.get_include(),
+    ],
+    extra_compile_args=["-std=c99", "-I/dls_sw/apps/mamba/2.0.5/include/python3.12"],
+)
 
 
-if __name__ == "__main__":
-    setup(name="mapper_c_utils", version="1.1.0", configuration=configuration)
+setup(
+    name="mapper_c_utils",
+    version="1.1.0",
+    ext_modules=[ext],
+)
