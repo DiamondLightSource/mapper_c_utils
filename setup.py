@@ -1,5 +1,5 @@
 """
-latest version created: parsing_detector in mapper_c_utils/
+latest version created: multi_config in mapper_c_utils/
 """
 
 import sysconfig
