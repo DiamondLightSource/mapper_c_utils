@@ -1,5 +1,5 @@
 """
-latest version created: fix_pyqt_issue in mapper_c_utils/
+latest version created: multi_config in mapper_c_utils/
 """
 
 import sysconfig
