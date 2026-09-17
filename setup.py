@@ -1,5 +1,5 @@
 """
-latest version created: parsing_detector in mapper_c_utils/
+latest version created: tiff_dat_extract in mapper_c_utils/
 """
 
 import sysconfig
